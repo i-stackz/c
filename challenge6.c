@@ -6,7 +6,7 @@
 
     Source: Udemy - C Programming for Beginners - Master the C Language: Section 7 Challenge #2
 
-    Author: E. Gomez
+    Author: iStackz
     Date: 7/26/24
 
 */
