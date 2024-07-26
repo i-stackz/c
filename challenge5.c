@@ -14,87 +14,81 @@
 // pre-processor directives
 #include <stdio.h>
 
+// constants
+#define BASICRATE 12.00
+#define OVERTIMERATE 1.5
+#define TAXRATE1 0.15
+#define TAXRATE2 0.20
+#define TAXRATE3 0.25
 
 // main function
 int main()
 {
     // variables
-    float basicPayRate, overtimeRate, taxRate1, taxRate2, taxRate3, paycheck, hoursWorked;
+    float hoursWorked, gross, net, tax1, tax2, tax3, paycheck;
 
-    // initialize variables
-    basicPayRate = 12.00;
-    overtimeRate = 1.5;
-    taxRate1 = 0.15;
-    taxRate2 = 0.20;
-    taxRate3 = 0.25;
-    paycheck = 0;
-
-    // display output and prompt for user input
-    printf("\n\nEnter hours worked for the week: ");
+    // display message and prompt for input
+    printf("Enter hours worked for the week: ");
     scanf(" %f", &hoursWorked);
 
-    // while loop that will run while hoursWorked is less than or equal to 0
+    // validate user input
     while (hoursWorked <= 0)
     {
-        // display message and prompt for input
-        printf("\nError! hours worked cannot be zero or less, try again!: ");
+        // display message
+        printf("Error! hours worked cannot be less than 0. Try again!: ");
         scanf(" %f", &hoursWorked);
     }
-    
-    // perform calculation
-    if ( hoursWorked > 40)
-    {
-        /* test
-        // overtime paycheck
-        float regularPay = (basicPayRate * 40);
-        float overtimePay = (overtimeRate * basicPayRate) * (hoursWorked - 40);
-        paycheck = regularPay + overtimePay;
-        */
 
-        // overtime paycheck
-        paycheck = ( (basicPayRate * 40) + ( (overtimeRate * basicPayRate) * (hoursWorked - 40) ) );
-    }
-    else
+    //==> calculate check <==//
+
+    // gross income (if worked 40 hrs or less)
+    if(hoursWorked <= 40)
     {
-        // regular paycheck
-        paycheck = hoursWorked * basicPayRate;
+        // hours worked * 12/hr = gross pay
+        gross = hoursWorked * BASICRATE;
     }
+    else // more than 40 hrs
+    {
+        // gross = regular check + extra hrs at overtime rate
+        gross = (BASICRATE * 40) + ((hoursWorked - 40) * (BASICRATE * OVERTIMERATE));
+    }
+
+    //** calculate taxes **//
+
+    // if gross is over 300       
+    if(gross >= 300)
+    {
+        // tax on 1st 300 at .15
+        tax1 = (300 * TAXRATE1);
+        // calculate net to use on 2nd if statement
+        net = gross - tax1;
+    }
+
+    // if after 1st deduction amount is greater than 150
+    if(net >= 150)
+    {
+        // tax on 1st 150 at .20 after 1st deduction
+        tax2 = (150 * TAXRATE2);
+        // calculate net to use on 3rd if statement 
+        net = net - tax2;
+    }
+
+    // if remaining amount is greater than 0
+    if(net > 0)
+    {
+        // tax on any remaining amount at .25 after other two deductions
+        tax3 = ((gross - 450) * TAXRATE3);
+        // calculate net
+        net = net - tax3; 
+    }
+
+    // calculate paycheck
+    paycheck = gross - (tax1 + tax2 + tax3);
 
     // display message
-    printf("\nYour paycheck before taxes is %.2f (gross) \n", paycheck);
-
-    // calculate the taxes
-    if ( (paycheck - 300) >= 0 )
-    {
-        // tax deduction on the 1st 300 dollars from paycheck
-        paycheck = paycheck - (300 * taxRate1);
-
-        // test 1
-        printf("\npaycheck balance after 1st tax rate is %.2f", paycheck);
-    }
-
-    // tax deduction on the 1st 150 dollars from paycheck and after the 1st tax deduction.
-    if ( (paycheck - 150) >= 0)
-    {
-        // tax deduction on the 1st 150 dollars from check after the 1st deduction
-        paycheck = paycheck - (150 * taxRate2);
-
-        // test 2
-        printf("\npaycheck balance after 2nd tax rate is %.2f", paycheck);
-    }
-
-    // tax deduction on the remaining paycheck amount for 25%
-    if ( paycheck > 0 )
-    {
-        // tax deduction on the remaining paycheck balance
-        paycheck = paycheck - (paycheck * taxRate3);
-
-        // test 3
-        printf("\npaycheck balance after 3rd tax rate is %.2f\n", paycheck);
-    }
-
-    // display output
-    printf("\nYour paycheck after taxes is %.2f (net)\n\n", paycheck);
+    printf("\n\nYour paycheck before taxes is %.2f", gross);
+    printf("\nYour paycheck after taxes is %.2f", net);
+    printf("\nYou've been deducted %.2f in taxes\n\n", (gross - net));
 
     // exit successfully
     return 0;
