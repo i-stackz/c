@@ -27,8 +27,11 @@ int main()
     // variables
     float hoursWorked, gross, net, tax1, tax2, tax3, paycheck;
 
+    // program title
+    printf("\n\n** Weekly Pay Calculator **\n\n");
+
     // display message and prompt for input
-    printf("Enter hours worked for the week: ");
+    printf("\nEnter hours worked for the week: ");
     scanf(" %f", &hoursWorked);
 
     // validate user input
@@ -55,6 +58,38 @@ int main()
 
     //** calculate taxes **//
 
+    // edited 8/3/2024
+    
+    // taxes on the 1st $300
+    if(gross >= 300)
+    {
+        // tax1 = 300 * .15
+        tax1 = (300 * TAXRATE1);
+    }
+
+    // taxes on the 1st $150 after the tax taken on the 1st $300
+    if((gross - 300) >= 150)
+    {
+        // tax2 = 150 * .20
+        tax2 = (150 * TAXRATE2);
+    }
+
+    // taxes on the remaining amount after the taxes taken on $450
+    if ((gross - 450) > 0)
+    {
+        // tax3 = (gross - 450) * .25
+        tax3 = ((gross - 450) * TAXRATE3);
+    }
+
+    // calculate paycheck
+    paycheck = gross - (tax1 + tax2 + tax3);
+
+    // display messages
+    printf("\n\nYour paycheck before taxes was $%.2f\n", gross);
+    printf("Your paycheck after taxes is $%.2f\n", paycheck);
+    printf("You have paid $%.2f in taxes this pay period\n\n", (tax1 + tax2 + tax3));   
+
+/*
     // if gross is over 300       
     if(gross >= 300)
     {
@@ -85,11 +120,13 @@ int main()
     // calculate paycheck
     paycheck = gross - (tax1 + tax2 + tax3);
 
+
+
     // display message
     printf("\n\nYour paycheck before taxes is %.2f", gross);
     printf("\nYour paycheck after taxes is %.2f", net);
     printf("\nYou've been deducted %.2f in taxes\n\n", (gross - net));
-
+*/
     // exit successfully
     return 0;
 }
