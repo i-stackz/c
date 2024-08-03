@@ -1,15 +1,15 @@
 /*
-
-    Description: Program that calculates your weekly pay
-    Source: Challenge 5 from Udemy C Programming for Beginners - Master the C Language (section 7 challenge)
-
-    Author: iStackz
-    date: 7/25/2024
-
-    Filename: weekly_pay.c
-    Executable: weekly_pay.o
-
-*/
+ * Description: Program that calculates your weekly pay
+ * Source: Challenge 5 from Udemy C Programming for Beginners - Master the C Language (section 7 challenge)
+ *
+ * Author: iStackz
+ * Date: 7/25/2024
+ * Edited:  8/3/2024
+ *  
+ * Filename: weekly_pay.c
+ * Executable: weekly_pay.o
+ *
+ */
 
 // pre-processor directives
 #include <stdio.h>
@@ -35,7 +35,7 @@ int main()
     scanf(" %f", &hoursWorked);
 
     // validate user input
-    while (hoursWorked <= 0)
+    while(hoursWorked <= 0)
     {
         // display message
         printf("Error! hours worked cannot be less than 0. Try again!: ");
@@ -75,7 +75,7 @@ int main()
     }
 
     // taxes on the remaining amount after the taxes taken on $450
-    if ((gross - 450) > 0)
+    if((gross - 450) > 0)
     {
         // tax3 = (gross - 450) * .25
         tax3 = ((gross - 450) * TAXRATE3);
@@ -127,6 +127,7 @@ int main()
     printf("\nYour paycheck after taxes is %.2f", net);
     printf("\nYou've been deducted %.2f in taxes\n\n", (gross - net));
 */
+
     // exit successfully
     return 0;
 }
