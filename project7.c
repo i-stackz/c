@@ -1,11 +1,11 @@
 /*
-    Source: Project 7 from Chapter 2 of LearnCthehardway pdf page 59
-    
-    Description: 
-                 Write a program that asks the user to enter a U.S. dollare amount and then shows you how to pay that amount
-                 using the smallest number of $20, $10, $5, and $1 bills
-                 
-    Author: iStackz
+ * Source: Project 7 from Chapter 2 of C Programming a Modern Approach 2nd Edition by K.N. King:  pdf page 59
+ * 
+ * Description: 
+ * 		Write a program that asks the user to enter a U.S. dollare amount and then shows you how to pay that amount
+ * 		using the smallest number of $20, $10, $5, and $1 bills
+ *
+ * Author: iStackz
 */
 
 // Pre-processor directives
